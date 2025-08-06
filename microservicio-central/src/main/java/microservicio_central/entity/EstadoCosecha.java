@@ -1,4 +1,7 @@
 package microservicio_central.entity;
 
-public class EstadoCosecha {
+public enum EstadoCosecha {
+    REGISTRADA,
+    PROCESANDO,
+    FACTURADA
 }
