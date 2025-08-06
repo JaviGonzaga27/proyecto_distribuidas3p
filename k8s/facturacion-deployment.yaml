@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: facturacion
+  namespace: agroflow-ns
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: facturacion
+  template:
+    metadata:
+      labels:
+        app: facturacion
+    spec:
+      containers:
+        - name: facturacion
+          image: tu-usuario/agroflow-facturacion:latest
+          ports:
+            - containerPort: 8082
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: "kubernetes"
+            - name: SPRING_DATASOURCE_URL
+              value: "jdbc:mysql://mysql-facturacion-svc:3306/facturacion_db"
+            - name: SPRING_DATASOURCE_USERNAME
+              value: "admin"
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: "admin123"
+            - name: SPRING_RABBITMQ_HOST
+              value: "rabbitmq-svc"
+            - name: SPRING_RABBITMQ_USERNAME
+              value: "admin"
+            - name: SPRING_RABBITMQ_PASSWORD
+              value: "admin123"
+            - name: SERVICES_CENTRAL_URL
+              value: "http://central-svc:8080"
+          resources:
+            requests:
+              cpu: 200m
+              memory: 512Mi
+            limits:
+              cpu: 300m
+              memory: 768Mi
