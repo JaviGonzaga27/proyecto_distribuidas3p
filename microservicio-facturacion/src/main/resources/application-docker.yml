@@ -1,0 +1,41 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: microservicio-facturacion
+  datasource:
+    url: jdbc:mysql://${DB_HOST:mysql-facturacion}:3306/facturacion_db
+    username: admin
+    password: admin123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+  rabbitmq:
+    host: ${RABBITMQ_HOST:rabbitmq}
+    port: 5672
+    username: admin
+    password: admin123
+
+services:
+  central:
+    url: ${CENTRAL_SERVICE_URL:http://central:8080}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  level:
+    com.agroflow: INFO
+    org.springframework.amqp: WARN
