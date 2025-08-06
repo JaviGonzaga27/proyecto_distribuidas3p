@@ -34,11 +34,11 @@ spec:
             - --default-authentication-plugin=mysql_native_password
           resources:
             requests:
-              cpu: 200m
-              memory: 512Mi
+              cpu: 100m      # ⬇️ Reducido de 200m
+              memory: 256Mi  # ⬇️ Reducido de 512Mi
             limits:
-              cpu: 500m
-              memory: 1Gi
+              cpu: 300m      # ⬇️ Reducido de 500m
+              memory: 512Mi  # ⬇️ Reducido de 1Gi
           volumeMounts:
             - name: mysql-storage
               mountPath: /var/lib/mysql
