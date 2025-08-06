@@ -1,12 +1,14 @@
 #!/bin/bash
-echo "🧹 Eliminando imágenes anteriores..."
-echo "🚀 Construyendo imágenes con prefijo tu-usuario/..."
 
-# Compilar todos los proyectos
-echo "📦 Compilando microservicios..."
+echo "🧹 Eliminando imágenes anteriores de AgroFlow..."
+
+echo "🚀 Construyendo imágenes de AgroFlow con prefijo franciscoteran2001/..."
+
+# Compilar todos los microservicios
+echo "📦 Compilando microservicios de AgroFlow..."
 mvn clean package -DskipTests
 
-# Construir imágenes con prefijo correcto
+# Construir con prefijo correcto
 echo "🐳 Construyendo imagen Central..."
 cd microservicio-central
 docker build -t franciscoteran2001/agroflow-central:latest .
@@ -22,11 +24,15 @@ cd microservicio-facturacion
 docker build -t franciscoteran2001/agroflow-facturacion:latest .
 cd ..
 
-echo "✅ Imágenes construidas con prefijo tu-usuario/!"
+echo "✅ Imágenes de AgroFlow construidas con prefijo franciscoteran2001/!"
 docker images | grep franciscoteran2001/agroflow
 
 echo ""
 echo "📤 Para subir imágenes a Docker Hub:"
-echo "docker push tu-usuario/agroflow-central:latest"
-echo "docker push tu-usuario/agroflow-inventario:latest" 
-echo "docker push tu-usuario/agroflow-facturacion:latest"
+echo "docker push franciscoteran2001/agroflow-central:latest"
+echo "docker push franciscoteran2001/agroflow-inventario:latest"
+echo "docker push franciscoteran2001/agroflow-facturacion:latest"
+
+echo ""
+echo "🚀 Para desplegar en Kubernetes ejecuta:"
+echo "kubectl apply -f k8s/"

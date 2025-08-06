@@ -5,7 +5,7 @@ spring:
   application:
     name: microservicio-inventario
   datasource:
-    url: jdbc:mysql://${DB_HOST:mysql-inventario}:3306/inventario_db
+    url: jdbc:mysql://mysql-inventario-svc:3306/inventario_db
     username: admin
     password: admin123
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -17,21 +17,7 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
   rabbitmq:
-    host: ${RABBITMQ_HOST:rabbitmq}
+    host: rabbitmq-svc
     port: 5672
     username: admin
     password: admin123
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: health,info
-  endpoint:
-    health:
-      show-details: always
-
-logging:
-  level:
-    com.agroflow: INFO
-    org.springframework.amqp: WARN
