@@ -26,13 +26,19 @@ spec:
             - name: SPRING_DATASOURCE_USERNAME
               value: "admin"
             - name: SPRING_DATASOURCE_PASSWORD
-              value: "admin123"
+              valueFrom:
+                secretKeyRef:
+                  name: agroflow-secrets
+                  key: mysql-password
             - name: SPRING_RABBITMQ_HOST
               value: "rabbitmq-svc"
             - name: SPRING_RABBITMQ_USERNAME
               value: "admin"
             - name: SPRING_RABBITMQ_PASSWORD
-              value: "admin123"
+              valueFrom:
+                secretKeyRef:
+                  name: agroflow-secrets
+                  key: rabbitmq-password
           resources:
             requests:
               cpu: 200m
