@@ -1,4 +1,3 @@
-# application.yml - Microservicio Inventario
 server:
   port: 8081
 
@@ -6,20 +5,19 @@ spring:
   application:
     name: microservicio-inventario
   datasource:
-    url: jdbc:mysql://localhost:3306/inventario_db
+    url: jdbc:mysql://${DB_HOST:mysql-inventario}:3306/inventario_db
     username: admin
     password: admin123
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
       ddl-auto: update
-    show-sql: true
+    show-sql: false
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
-        format_sql: true
   rabbitmq:
-    host: localhost
+    host: ${RABBITMQ_HOST:rabbitmq}
     port: 5672
     username: admin
     password: admin123
@@ -35,4 +33,5 @@ management:
 
 logging:
   level:
-    com.agroflow: DEBUG
+    com.agroflow: INFO
+    org.springframework.amqp: WARN
